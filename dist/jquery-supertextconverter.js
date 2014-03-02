@@ -182,13 +182,19 @@
 		return str;
 	};
 
-	SuperTextConverter.prototype.toZenkaku = function(str){
+	SuperTextConverter.prototype.toZenkaku = function(str, convertOptions){
 		var stc = this, list, length, i = 0;
+		convertOptions = convertOptions || stc.options.convert;
 		str = str.replace(stc.regexp.hankaku,stc.fnc.toZenkaku);
 
 		list = stc.list.toZenkaku;
 		length = list.length;
 		for(; i < length; i += 1){
+			if(typeof list[i].type === 'string'){
+				if(convertOptions[list[i].type]){
+					str = str.replace(list[i].hankaku, list[i].zenkaku);
+				}
+			}
 			str = str.replace(list[i].hankaku, list[i].zenkaku);
 		}
 		return str;
@@ -234,7 +240,7 @@
 		if(options.widthMode === 'toHankaku'){
 			result = stc.toHankaku(str, options.convertPunctuation);
 		}else if(options.widthMode === 'toZenkaku'){
-			result = stc.toZenkaku(str);
+			result = stc.toZenkaku(str, options.convertPunctuation);
 		}
 
 		if(options.hankakuKatakanaMustDie){

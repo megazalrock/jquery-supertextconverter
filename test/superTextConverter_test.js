@@ -39,8 +39,8 @@
 
 	test('全角 -> 半角 正規表現外', function(){
 		stc = $.SuperTextConverter();
-		var result = stc.toHankaku('”’　￥―‐−｜〜、。，．');
-		var correctResult = '"\' ¥---|~,.,.'; // "'
+		var result = stc.toHankaku('”’　￥ー―‐−｜〜、。，．');
+		var correctResult = '"\' ¥----|~,.,.'; // "'
 		strictEqual(result, correctResult, result);
 		stc = null;
 	});
@@ -79,8 +79,8 @@
 
 	test('メールアドレス 全角 -> 半角', function(){
 		stc = $.SuperTextConverter();
-		var result = stc.toHankaku('ｂｅｎｅｄｉｃｔ．ｏｋ＋ｔｅｓｔ＠ｇｍａｉｌ．ｃｏｍ');
-		var correctResult = 'benedict.ok+test@gmail.com';
+		var result = stc.toHankaku('ｍａｉｌ＠ｅｘａｍｐｌｅ．ｃｏｍ');
+		var correctResult = 'mail@example.com';
 		strictEqual(result, correctResult, result);
 		stc = null;
 	});
@@ -150,7 +150,26 @@
 				space: false
 			}
 		});
-		var correctResult = 'JavaScriptは、ほんとーにたのし〜ね〜？！　ワロス。';
+		var correctResult = 'JavaScriptは、ほんと-にたのし〜ね〜？！　ワロス。';
+		strictEqual(result, correctResult, result);
+		stc = null;
+	});
+
+
+	test('文章 全角 -> 半角',function(){
+		stc = $.SuperTextConverter();
+		var result = stc.autoConvert('JavaScriptは、ほんと-にたのし〜ね〜？！　ワロス。', {
+			widthMode: 'toZenkaku',
+			convert: {
+				punctuation: false,
+				tilda: false,
+				exclamation: false,
+				question: false,
+				space: false,
+				hyphen: false
+			}
+		});
+		var correctResult = 'ＪａｖａＳｃｒｉｐｔは、ほんと-にたのし〜ね〜？！　ワロス。';
 		strictEqual(result, correctResult, result);
 		stc = null;
 	});
