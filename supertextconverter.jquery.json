@@ -2,7 +2,7 @@
   "name": "supertextconverter",
   "title": "jQuery Super Text Converter",
   "description": "Convert Zenkaku to Hankaku, Hiragana to Katakana",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/megazalrock/jquery-super-text-converter",
   "author": {
     "name": "MegazalRock (Otto Kamiya)",

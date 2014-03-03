@@ -1,5 +1,5 @@
 /*! jQuery Super Text Converter 2014-03-03
- *  Vertion : 1.0.1
+ *  Vertion : 1.0.2
  *  Dependencies : jQuery *
  *  Author : MegazalRock (Otto Kamiya)
  *  Copyright (c) 2014 MegazalRock (Otto Kamiya);
