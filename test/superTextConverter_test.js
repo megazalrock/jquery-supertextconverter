@@ -155,7 +155,6 @@
 		stc = null;
 	});
 
-
 	test('文章 全角 -> 半角',function(){
 		stc = $.SuperTextConverter();
 		var result = stc.autoConvert('JavaScriptは、ほんと-にたのし〜ね〜？！　ワロス。', {
@@ -173,4 +172,5 @@
 		strictEqual(result, correctResult, result);
 		stc = null;
 	});
+
 }(jQuery));
