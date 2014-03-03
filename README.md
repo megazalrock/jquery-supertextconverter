@@ -147,14 +147,26 @@ text = stc.killHankakuKatakana(text);
 #### widthMode
 
 autoConvert();時のみ有効です。
+`'toHankaku'`を指定すると半角に変換します。
+`'toZenkaku'`を指定すると全角に変換します。
+`false`を指定すると変換しません。
+
+デフォルト値は`toHankaku`です。
 
 #### kanaMode
 
 autoConvert();時のみ有効です。
+`'toKatakana'`を指定するとカタカナに変換します。
+`'toHiragana'`を指定するとひらがなに変換します。
+`false`を指定すると変換しません。
+
+デフォルト値は`false`です。
 
 #### hankakuKatakanaMustDie
 
 `autoConvert()`時のみ有効です。
+半角カナを全角に変換します。
+デフォルト値は`true`です。
 
 #### convert
 
