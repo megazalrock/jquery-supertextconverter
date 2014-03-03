@@ -5,7 +5,7 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     // Metadata.
-    pkg: grunt.file.readJSON('superTextConverter.jquery.json'),
+    pkg: grunt.file.readJSON('supertextconverter.jquery.json'),
     banner:'/*! <%= pkg.title %> <%= grunt.template.today("yyyy-mm-dd") %>\n' +
       ' *  Vertion : <%= pkg.version %>\n'+
       ' *  Dependencies : jQuery <%= pkg.dependencies.jquery %>\n'+
@@ -23,7 +23,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['src/*.js'],
-        dest: 'dist/<%= pkg.name %>.js'
+        dest: 'dist/jquery-<%= pkg.name %>-plugin.js'
       },
     },
     uglify: {
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: '<%= concat.dist.dest %>',
-        dest: 'dist/<%= pkg.name %>.min.js'
+        dest: 'dist/jquery-<%= pkg.name %>-plugin.min.js'
       },
     },
     qunit: {

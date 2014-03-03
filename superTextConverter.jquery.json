@@ -1,5 +1,5 @@
 {
-  "name": "jquery-supertextconverter",
+  "name": "supertextconverter",
   "title": "jQuery Super Text Converter",
   "description": "Convert Zenkaku to Hankaku, Hiragana to Katakana",
   "version": "1.0.0",
