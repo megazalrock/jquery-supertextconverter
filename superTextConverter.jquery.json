@@ -2,8 +2,8 @@
   "name": "jquery-supertextconverter",
   "title": "jQuery Super Text Converter",
   "description": "Convert Zenkaku to Hankaku, Hiragana to Katakana",
-  "version": "0.1.0",
-  "homepage": "https://github.com/otto/jquery-super-text-converter",
+  "version": "1.0.0",
+  "homepage": "https://github.com/megazalrock/jquery-super-text-converter",
   "author": {
     "name": "MegazalRock (Otto Kamiya)",
     "email": "otto@mgzl.jp",
@@ -11,13 +11,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/otto/jquery-supertextconverter.git"
+    "url": "git://github.com/megazalrock/jquery-supertextconverter.git"
   },
-  "bugs": "https://github.com/otto/jquery-supertextconverter/issues",
+  "bugs": "https://github.com/megazalrock/jquery-supertextconverter/issues",
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/otto/jquery-supertextconverter/blob/master/LICENSE-MIT"
+      "url": "https://github.com/megazalrock/jquery-supertextconverter/blob/master/LICENSE-MIT"
     }
   ],
   "dependencies": {
