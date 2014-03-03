@@ -1,5 +1,5 @@
 /*! jQuery Super Text Converter 2014-03-03
- *  Vertion : 0.1.0
+ *  Vertion : 1.0.0
  *  Dependencies : jQuery *
  *  Author : MegazalRock (Otto Kamiya)
  *  Copyright (c) 2014 MegazalRock (Otto Kamiya);
@@ -17,7 +17,8 @@
 				tilda: true,
 				exclamation: true,
 				question: true,
-				space: true
+				space: true,
+				hyphen: true
 			},
 			zenkakuHyphen: 'ー',
 			zenkakuChilda: '〜'
@@ -58,8 +59,9 @@
 					zenkaku : /￥/g,
 					hankaku : '¥'
 				},{
-					zenkaku : /[―‐−]/g,
-					hankaku : '-'
+					zenkaku : /[ー―‐−]/g,
+					hankaku : '-',
+					type : 'hyphen'
 				},{
 					zenkaku : /｜/g,
 					hankaku : '|'
@@ -100,9 +102,9 @@
 					hankaku : /[¥\\]/g,
 					zenkaku : '￥'
 				},{
-					hankaku : /[ｰ\-]/g,
+					hankaku : /[\-ｰ]/g,
 					zenkaku : stc.options.zenkakuHyphen,
-					type: 'macron'
+					type : 'hyphen'
 				},{
 					hankaku : /\|/g,
 					zenkaku : '｜'
@@ -163,16 +165,17 @@
 		];
 	};
 
-	SuperTextConverter.prototype.toHankaku = function(str, convertOptions){
+	SuperTextConverter.prototype.toHankaku = function(str, options){
 		var stc = this, list, length, i = 0;
-		convertOptions = convertOptions || stc.options.convert;
+		options = $.extend(true, stc.options, options || {});
+
 		str = str.replace(stc.regexp.zenkaku,stc.fnc.toHankaku);
 
 		list = stc.list.toHankaku;
 		length = list.length;
 		for(; i < length; i += 1){
 			if(typeof list[i].type === 'string'){
-				if(convertOptions[list[i].type]){
+				if(options.convert[list[i].type]){
 					str = str.replace(list[i].zenkaku, list[i].hankaku);
 				}
 			}else{
@@ -182,20 +185,22 @@
 		return str;
 	};
 
-	SuperTextConverter.prototype.toZenkaku = function(str, convertOptions){
+	SuperTextConverter.prototype.toZenkaku = function(str, options){
 		var stc = this, list, length, i = 0;
-		convertOptions = convertOptions || stc.options.convert;
+		options = $.extend(true, stc.options, options || {});
+
 		str = str.replace(stc.regexp.hankaku,stc.fnc.toZenkaku);
 
 		list = stc.list.toZenkaku;
 		length = list.length;
 		for(; i < length; i += 1){
 			if(typeof list[i].type === 'string'){
-				if(convertOptions[list[i].type]){
+				if(options.convert[list[i].type]){
 					str = str.replace(list[i].hankaku, list[i].zenkaku);
 				}
+			}else{
+				str = str.replace(list[i].hankaku, list[i].zenkaku);
 			}
-			str = str.replace(list[i].hankaku, list[i].zenkaku);
 		}
 		return str;
 	};
@@ -221,29 +226,19 @@
 		return str.replace(stc.regexp.hiragana, stc.fnc.toKatakana);
 	};
 
-	SuperTextConverter.prototype.autoConvert = function(str, widthMode, kanaMode){
+	SuperTextConverter.prototype.autoConvert = function(str, options){
 		var stc = this;
 		var result;
-		var options, _options = {};
 
-		if($.isPlainObject(widthMode)){
-			_options = widthMode || {};
-		}else{
-			_options = {
-				widthMode: widthMode || stc.options.widthMode,
-				kanaMode: kanaMode || stc.options.kanaMode
-			};			
-		}
+		options = $.extend(true, stc.options, options);
 
-		options = $.extend(true, stc.options, _options);
-
-		if(options.widthMode === 'toHankaku'){
-			result = stc.toHankaku(str, options.convertPunctuation);
+		if(options.widthMode && options.widthMode === 'toHankaku'){
+			result = stc.toHankaku(str, options.convert);
 		}else if(options.widthMode === 'toZenkaku'){
-			result = stc.toZenkaku(str, options.convertPunctuation);
+			result = stc.toZenkaku(str, options.convert);
 		}
 
-		if(options.hankakuKatakanaMustDie){
+		if(options.widthMode && options.hankakuKatakanaMustDie){
 			result = stc.killHankakuKatakana(result);
 		}
 
