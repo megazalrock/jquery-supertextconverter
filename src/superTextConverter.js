@@ -234,13 +234,13 @@
 
 		options = $.extend(true, stc.options, options);
 
-		if(options.widthMode === 'toHankaku'){
+		if(options.widthMode && options.widthMode === 'toHankaku'){
 			result = stc.toHankaku(str, options.convert);
 		}else if(options.widthMode === 'toZenkaku'){
 			result = stc.toZenkaku(str, options.convert);
 		}
 
-		if(options.hankakuKatakanaMustDie){
+		if(options.widthMode && options.hankakuKatakanaMustDie){
 			result = stc.killHankakuKatakana(result);
 		}
 
